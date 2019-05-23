@@ -18,7 +18,7 @@
 /**
  * @fileoverview Functions to create and manipulate URLs for the server API.
  */
-import * as object from './object';
+import { forEach } from '@firebase/util';
 import { DEFAULT_HOST } from './constants';
 
 export function makeUrl(urlPart: string): string {
@@ -28,7 +28,7 @@ export function makeUrl(urlPart: string): string {
 export function makeQueryString(params: { [key: string]: string }): string {
   let encode = encodeURIComponent;
   let queryPart = '?';
-  object.forEach(params, function(key, val) {
+  forEach(params, function(key, val) {
     let nextPart = encode(key) + '=' + encode(val);
     queryPart = queryPart + nextPart + '&';
   });

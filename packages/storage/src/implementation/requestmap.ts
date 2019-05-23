@@ -14,8 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import * as object from './object';
-import * as RequestExports from './request';
+import { forEach } from '@firebase/util';
 import { Request } from './request';
 import * as constants from './constants';
 
@@ -51,7 +50,7 @@ export class RequestMap {
    * Cancels all registered requests.
    */
   clear() {
-    object.forEach(this.map_, (key: string, val: Request<any>) => {
+    forEach(this.map_, (key: string, val: Request<any>) => {
       if (val) {
         val.cancel(true);
       }

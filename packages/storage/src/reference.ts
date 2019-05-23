@@ -18,13 +18,13 @@
 /**
  * @fileoverview Defines the Firebase Storage Reference class.
  */
+import { clone } from '@firebase/util';
 import * as args from './implementation/args';
 import { AuthWrapper } from './implementation/authwrapper';
 import { FbsBlob } from './implementation/blob';
 import * as errorsExports from './implementation/error';
 import { Location } from './implementation/location';
 import * as metadata from './implementation/metadata';
-import * as object from './implementation/object';
 import * as path from './implementation/path';
 import * as requests from './implementation/requests';
 import * as fbsString from './implementation/string';
@@ -175,7 +175,7 @@ export class Reference {
     );
     this.throwIfRoot_('putString');
     let data = fbsString.dataFromString(format, string);
-    let metadata = object.clone<Metadata>(opt_metadata);
+    let metadata = clone(opt_metadata);
     if (!type.isDef(metadata['contentType']) && type.isDef(data.contentType)) {
       metadata['contentType'] = data.contentType;
     }

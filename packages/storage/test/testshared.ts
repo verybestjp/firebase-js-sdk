@@ -16,9 +16,9 @@
  */
 import { expect } from 'chai';
 import { FirebaseApp } from '@firebase/app-types';
+import { contains, forEach } from '@firebase/util';
 import * as constants from '../src/implementation/constants';
 import { Code, FirebaseStorageError } from '../src/implementation/error';
-import * as objectUtils from '../src/implementation/object';
 import * as promiseimpl from '../src/implementation/promise_external';
 import * as type from '../src/implementation/type';
 import { Headers, XhrIo } from '../src/implementation/xhrio';
@@ -63,14 +63,14 @@ export function makePool(sendHook: SendHook): XhrIoPool {
  */
 export function fakeXhrIo(headers: Headers, status: number = 200): XhrIo {
   const lower: StringHeaders = {};
-  objectUtils.forEach(headers, function(key: string, val: string | number) {
+  forEach(headers, function(key: string, val: string | number) {
     lower[key.toLowerCase()] = val.toString();
   });
 
   const fakeXhrIo: any = {
     getResponseHeader: function(name: string): string {
       const lowerName = name.toLowerCase();
-      if (objectUtils.contains(lower, lowerName)) {
+      if (contains(lower, lowerName)) {
         return lower[lowerName];
       } else {
         throw new Error('No such header ' + name);
@@ -120,7 +120,7 @@ export function assertObjectIncludes(
   included: { [name: string]: any },
   obj: { [name: string]: any }
 ): void {
-  objectUtils.forEach(included, function(key, val) {
+  forEach(included, function(key, val) {
     expect(val).to.deep.equal(obj[key]);
   });
 }

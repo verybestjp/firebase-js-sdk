@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 import * as errorsExports from './error';
-import * as object from './object';
+import { forEach } from '@firebase/util';
 import * as promiseimpl from './promise_external';
 import * as type from './type';
 import * as XhrIoExports from './xhrio';
@@ -65,7 +65,7 @@ export class NetworkXhrIo implements XhrIo {
     this.xhr_.open(method, url, true);
     if (type.isDef(opt_headers)) {
       const headers = opt_headers as Headers;
-      object.forEach(headers, (key, val) => {
+      forEach(headers, (key, val) => {
         this.xhr_.setRequestHeader(key, val.toString());
       });
     }

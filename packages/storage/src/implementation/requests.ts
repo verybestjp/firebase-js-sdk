@@ -30,7 +30,7 @@ import { FirebaseStorageError } from './error';
 import { Location } from './location';
 import * as MetadataUtils from './metadata';
 import * as ListResultUtils from './list';
-import * as object from './object';
+import { clone } from '@firebase/util';
 import { RequestInfo } from './requestinfo';
 import * as type from './type';
 import * as UrlUtils from './url';
@@ -268,7 +268,7 @@ export function metadataForUpload_(
   blob: FbsBlob,
   opt_metadata?: Metadata | null
 ): Metadata {
-  let metadata = object.clone<Metadata>(opt_metadata);
+  let metadata = clone(opt_metadata);
   metadata['fullPath'] = location.path;
   metadata['size'] = blob.size();
   if (!metadata['contentType']) {

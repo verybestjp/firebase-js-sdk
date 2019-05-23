@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { forEach } from '../src/implementation/object';
+import { forEach } from '@firebase/util';
 import * as promiseimpl from '../src/implementation/promise_external';
 import * as type from '../src/implementation/type';
 import { ErrorCode, Headers, XhrIo } from '../src/implementation/xhrio';
