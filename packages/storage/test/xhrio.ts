@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { forEach } from '@firebase/util';
+
 import * as promiseimpl from '../src/implementation/promise_external';
 import * as type from '../src/implementation/type';
 import { ErrorCode, Headers, XhrIo } from '../src/implementation/xhrio';
@@ -85,9 +85,9 @@ export class TestingXhrIo implements XhrIo {
     this.status = status;
     this.responseText = body;
     this.headers = {};
-    forEach(headers, (key: string, val: string | number) => {
-      this.headers[key.toLowerCase()] = val.toString();
-    });
+    for (const [key, value] of Object.entries(headers)) {
+      this.headers[key.toLowerCase()] = value.toString();
+    }
     this.errorCode = ErrorCode.NO_ERROR;
 
     this.state = State.DONE;

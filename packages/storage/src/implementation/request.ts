@@ -25,7 +25,6 @@ import * as array from './array';
 import * as backoff from './backoff';
 import * as errorsExports from './error';
 import { FirebaseStorageError } from './error';
-import { clone } from '@firebase/util';
 import * as promiseimpl from './promise_external';
 import { RequestInfo } from './requestinfo';
 import * as type from './type';
@@ -291,7 +290,7 @@ export function makeRequest<T>(
 ): Request<T> {
   let queryPart = UrlUtils.makeQueryString(requestInfo.urlParams);
   let url = requestInfo.url + queryPart;
-  let headers = clone(requestInfo.headers);
+  let headers = { ...requestInfo.headers };
   addAuthHeader_(headers, authToken);
   addVersionHeader_(headers);
   return new NetworkRequest<T>(

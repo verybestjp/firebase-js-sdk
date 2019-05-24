@@ -16,7 +16,7 @@
  */
 import { expect } from 'chai';
 import { FirebaseApp } from '@firebase/app-types';
-import { contains, forEach } from '@firebase/util';
+import { contains } from '@firebase/util';
 import * as constants from '../src/implementation/constants';
 import { Code, FirebaseStorageError } from '../src/implementation/error';
 import * as promiseimpl from '../src/implementation/promise_external';
@@ -63,9 +63,9 @@ export function makePool(sendHook: SendHook): XhrIoPool {
  */
 export function fakeXhrIo(headers: Headers, status: number = 200): XhrIo {
   const lower: StringHeaders = {};
-  forEach(headers, function(key: string, val: string | number) {
-    lower[key.toLowerCase()] = val.toString();
-  });
+  for (const [key, value] of Object.entries(headers)) {
+    lower[key.toLowerCase()] = value.toString();
+  }
 
   const fakeXhrIo: any = {
     getResponseHeader: function(name: string): string {
@@ -120,7 +120,7 @@ export function assertObjectIncludes(
   included: { [name: string]: any },
   obj: { [name: string]: any }
 ): void {
-  forEach(included, function(key, val) {
-    expect(val).to.deep.equal(obj[key]);
-  });
+  for (const [key, value] of Object.entries(included)) {
+    expect(value).to.deep.equal(obj[key]);
+  }
 }

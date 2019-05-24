@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 import * as errorsExports from './error';
-import { forEach } from '@firebase/util';
 import * as promiseimpl from './promise_external';
 import * as type from './type';
 import * as XhrIoExports from './xhrio';
@@ -34,16 +33,16 @@ export class NetworkXhrIo implements XhrIo {
   constructor() {
     this.xhr_ = new XMLHttpRequest();
     this.errorCode_ = XhrIoExports.ErrorCode.NO_ERROR;
-    this.sendPromise_ = promiseimpl.make((resolve, reject) => {
-      this.xhr_.addEventListener('abort', event => {
+    this.sendPromise_ = promiseimpl.make(resolve => {
+      this.xhr_.addEventListener('abort', () => {
         this.errorCode_ = XhrIoExports.ErrorCode.ABORT;
         resolve(this);
       });
-      this.xhr_.addEventListener('error', event => {
+      this.xhr_.addEventListener('error', () => {
         this.errorCode_ = XhrIoExports.ErrorCode.NETWORK_ERROR;
         resolve(this);
       });
-      this.xhr_.addEventListener('load', event => {
+      this.xhr_.addEventListener('load', () => {
         resolve(this);
       });
     });
@@ -55,22 +54,21 @@ export class NetworkXhrIo implements XhrIo {
   send(
     url: string,
     method: string,
-    opt_body?: ArrayBufferView | Blob | string | null,
-    opt_headers?: Headers
+    body?: ArrayBufferView | Blob | string | null,
+    headers?: Headers
   ): Promise<XhrIo> {
     if (this.sent_) {
       throw errorsExports.internalError('cannot .send() more than once');
     }
     this.sent_ = true;
     this.xhr_.open(method, url, true);
-    if (type.isDef(opt_headers)) {
-      const headers = opt_headers as Headers;
-      forEach(headers, (key, val) => {
-        this.xhr_.setRequestHeader(key, val.toString());
-      });
+    if (type.isDef(headers)) {
+      for (const [key, value] of Object.entries(headers)) {
+        this.xhr_.setRequestHeader(key, value.toString());
+      }
     }
-    if (type.isDef(opt_body)) {
-      this.xhr_.send(opt_body);
+    if (type.isDef(body)) {
+      this.xhr_.send(body);
     } else {
       this.xhr_.send();
     }

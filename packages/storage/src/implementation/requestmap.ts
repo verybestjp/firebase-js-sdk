@@ -14,47 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { forEach } from '@firebase/util';
+
 import { Request } from './request';
 import * as constants from './constants';
 
-/**
- * @struct
- */
 export class RequestMap {
-  private map_: { [key: number]: Request<any> } = {};
-  private id_: number;
+  private readonly map: Map<number, Request<unknown>> = new Map();
+  private id: number;
 
   constructor() {
-    this.id_ = constants.MIN_SAFE_INTEGER;
+    this.id = constants.MIN_SAFE_INTEGER;
   }
 
   /**
    * Registers the given request with this map.
    * The request is unregistered when it completes.
-   * @param r The request to register.
+   *
+   * @param request The request to register.
    */
-  addRequest(r: Request<any>) {
-    let id = this.id_;
-    this.id_++;
-    this.map_[id] = r;
-    let self = this;
+  addRequest(request: Request<unknown>) {
+    let id = this.id;
+    this.id++;
+    this.map.set(id, request);
 
-    function unmap() {
-      delete self.map_[id];
-    }
-    r.getPromise().then(unmap, unmap);
+    const unmap = () => {
+      this.map.delete(id);
+    };
+    request.getPromise().then(unmap, unmap);
   }
 
   /**
    * Cancels all registered requests.
    */
   clear() {
-    forEach(this.map_, (key: string, val: Request<any>) => {
-      if (val) {
-        val.cancel(true);
-      }
+    this.map.forEach(v => {
+      v && v.cancel(true);
     });
-    this.map_ = {};
+    this.map.clear();
   }
 }

@@ -18,7 +18,6 @@
 /**
  * @fileoverview Functions to create and manipulate URLs for the server API.
  */
-import { forEach } from '@firebase/util';
 import { DEFAULT_HOST } from './constants';
 
 export function makeUrl(urlPart: string): string {
@@ -28,10 +27,10 @@ export function makeUrl(urlPart: string): string {
 export function makeQueryString(params: { [key: string]: string }): string {
   let encode = encodeURIComponent;
   let queryPart = '?';
-  forEach(params, function(key, val) {
-    let nextPart = encode(key) + '=' + encode(val);
+  for (const [key, value] of Object.entries(params)) {
+    let nextPart = encode(key) + '=' + encode(value);
     queryPart = queryPart + nextPart + '&';
-  });
+  }
 
   // Chop off the extra '&' or '?' on the end
   queryPart = queryPart.slice(0, -1);

@@ -15,19 +15,14 @@
  * limitations under the License.
  */
 
-import { forEach } from './obj';
-
 /**
  * Returns a querystring-formatted string (e.g. &arg=val&arg2=val2) from a params
  * object (e.g. {arg: 'val', arg2: 'val2'})
  * Note: You must prepend it with ? when adding it to a URL.
- *
- * @param {!Object} querystringParams
- * @return {string}
  */
-export const querystring = function(querystringParams) {
+export function querystring(querystringParams: { [key: string]: string }) {
   var params = [];
-  forEach(querystringParams, function(key, value) {
+  for (const [key, value] of Object.entries(querystringParams)) {
     if (Array.isArray(value)) {
       value.forEach(function(arrayVal) {
         params.push(
@@ -37,9 +32,9 @@ export const querystring = function(querystringParams) {
     } else {
       params.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
     }
-  });
+  }
   return params.length ? '&' + params.join('&') : '';
-};
+}
 
 /**
  * Decodes a querystring (e.g. ?arg=val&arg2=val2) into a params object (e.g. {arg: 'val', arg2: 'val2'})
