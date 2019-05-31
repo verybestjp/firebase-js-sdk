@@ -15,22 +15,22 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "firebase": "6.0.4",
+    "firebase": "6.1.0",
     "@firebase/logger": "0.1.14",
     "@firebase/util": "0.2.17",
     "@types/request": "2.48.1",
-    "grpc": "1.20.2",
+    "grpc": "1.21.1",
     "request": "2.88.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "mocha": "6.1.4",
-    "nyc": "14.1.0",
-    "rollup": "1.11.0",
+    "nyc": "14.1.1",
+    "rollup": "1.13.0",
     "rollup-plugin-copy-assets": "1.1.0",
     "rollup-plugin-replace": "2.2.0",
-    "rollup-plugin-typescript2": "0.21.0"
+    "rollup-plugin-typescript2": "0.21.1"
   },
   "repository": {
     "directory": "packages/testing",
