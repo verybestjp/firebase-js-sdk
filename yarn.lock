@@ -818,7 +818,7 @@
 
 "@google-cloud/common@^0.17.0":
   version "0.17.0"
-  resolved "http://registry.npmjs.org/@google-cloud/common/-/common-0.17.0.tgz#8ef558750db481fc10a13757a49479ab9a1c8c07"
+  resolved "https://registry.npmjs.org/@google-cloud/common/-/common-0.17.0.tgz#8ef558750db481fc10a13757a49479ab9a1c8c07"
   integrity sha512-HRZLSU762E6HaKoGfJGa8W95yRjb9rY7LePhjaHK9ILAnFacMuUGVamDbTHu1csZomm1g3tZTtXfX/aAhtie/Q==
   dependencies:
     array-uniq "^1.0.3"
@@ -4169,7 +4169,7 @@ compressible@^2.0.12, compressible@~2.0.13:
 
 compression@^1.7.0:
   version "1.7.2"
-  resolved "http://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
+  resolved "https://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
   integrity sha1-qv+81qr4VLROuygDU9WtFlH1mmk=
   dependencies:
     accepts "~1.3.4"
@@ -6958,10 +6958,10 @@ google-closure-compiler@20190415.0.0, google-closure-compiler@^20190415.0.0:
     google-closure-compiler-linux "^20190415.0.0"
     google-closure-compiler-osx "^20190415.0.0"
 
-google-closure-library@20190415.0.0:
-  version "20190415.0.0"
-  resolved "https://registry.npmjs.org/google-closure-library/-/google-closure-library-20190415.0.0.tgz#1753b98cd7cfdaeb7881ce0b3aaac4c6c653d391"
-  integrity sha512-fQLr9m6G54b5y1ygR1YWc1Fu5ZiZ1A0OpTP0mJOOx8GLuom0eHf16OQObTIoHX8P4y86LSk3+Hk/oHynTAkunQ==
+google-closure-library@20200315.0.0:
+  version "20200315.0.0"
+  resolved "https://registry.npmjs.org/google-closure-library/-/google-closure-library-20200315.0.0.tgz#e20769b4e5be77da053c2d3bb21effef70146702"
+  integrity sha512-LdCecdztxDvA9K+8b6E9aE4Hw7ABdYokfA7d5qW1sd/iy8O1l0+eXLlddE2JtW62gf8UjcPskBua4fU4J5lmHA==
 
 google-p12-pem@^0.1.0:
   version "0.1.2"
